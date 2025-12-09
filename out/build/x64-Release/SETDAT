@@ -1,0 +1,13 @@
+dt 1.0e-15
+frc 4.7e-10
+nbk 20
+vscale 0
+ensemble 1
+temp 300.0
+ini_velocity yes
+pbcx yes
+pbcy yes
+pbcz yes
+draw_bond yes
+bondlength 3.2
+segment 15

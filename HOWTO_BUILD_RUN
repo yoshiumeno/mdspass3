@@ -1,0 +1,67 @@
+[How to run mdspass3]
+
+buildにて作成した実行可能バイナリと同じディレクトリ（フォルダ）に
+SETDAT  settingを記したファイル
+CONFIG  原子構造ファイル
+pot/    ポテンシャルデータファイルを格納したディレクトリ
+が存在している必要があります。
+
+
+[How to build mdspass3]
+
+on Ubuntu:
+sudo apt install cmake libfltk1.3-dev libglu1-mesa-dev liblapack-dev libblas-dev
+libpng-dev libpng-dev
+rm -rf ./build
+cmake -S . -B build
+cd build
+make
+
+on macOS:
+brew install cmake fltk mesa-glu lapack openblas libpng
+rm -rf ./build
+cmake -S . -B build
+cd build
+make
+
+on Win:
+CMakeLists.txtの冒頭に
+#set(CMAKE_TOOLCHAIN_FILE "C:/Users/umeno/vcpkg/scripts/buildsystems/vcpkg.cmake")
+などと記述し，vcpkgでインストールしたライブラリ（libpng.libなど）を読み込ませるようにしておく必要があった．
+（https://zenn.dev/tenka/articles/use_vcpkg_and_cmake を参考にした）
+なおライブラリのインストールはvcpkgのinstallコマンドでOKで，ソースからビルドする必要はなかった．
+
+日本語コメントが不具合を起こす現象が見られたが，その際はutf-8 with BOM で保存すると解消された．
+但しこれは最終的に必要だったのかどうか不明（知能情報システムの最終納品版ではSJISが使われており，こちらでは問題が出なかったかも）．
+
+なお，#pragma comment(lib, "libpng.lib") などの行を"libpng16.lib"に変更する必要があった．
+
+#2025.09.12
+anacondaをインストールした環境ではパスの干渉が起こり、cmake -S . -B build でOpenGLが見つからないなどのエラーが出る。手っ取り早いのは、conda deactivate でanacondaを一時的にオフすること。再びanacondaを使うときに conda activate すれば良い。以下、ChatGPTの答え：
+
+conda activate した状態では
+
+which g++
+→ /home/umeno/anaconda3/bin/x86_64-conda-linux-gnu-c++
+など コンパイラやヘッダ・ライブラリ探索パスがすべて Anaconda 側に切り替わります。
+
+そのため FindOpenGL もまず Anaconda の中を探し、システム側 /usr/lib/... にある
+libOpenGL.so や libGLX.so を見つけられず、
+
+Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY OPENGL_glx_LIBRARY)
+というエラーになっていました。
+
+今後のポイント
+CMake実行前に conda deactivate
+システムの g++ / ライブラリを使いたい場合はこれが最も簡単。
+
+あるいは 一時的にシステム環境でビルド
+
+env -i HOME="$HOME" TERM="$TERM" PATH="/usr/bin:/bin" \
+  cmake -S . -B build
+もし Conda も併用したい場合は、
+
+Conda 側に libglvnd, libx11, fltk などを全部 conda-forge から揃える
+
+もしくは CMAKE_PREFIX_PATH を明示して完全に Conda に統一する必要があります。
+
