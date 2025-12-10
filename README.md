@@ -30,6 +30,7 @@ This repository contains the source code, and a pre-built binary for Windows.
 mdspass3/
 ├── CONFIG/          # Example configuration file
 ├── SETDAT/          # Example setting file
+├── build/           # working directory for Linux/macOS 
 ├── src/             # Source code, auxiliary libraries & build scripts for macOS
 ├── CMakeLists.txt   # CMake file
 ├── forWin/          # Pre-compiled binary for Windows
