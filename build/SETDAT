@@ -1,0 +1,7 @@
+radius 10
+show_axis yes
+color_mode 1
+color_mode_auto yes
+pbcx yes
+pbcy yes
+pbcz yes

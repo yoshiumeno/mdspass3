@@ -54,12 +54,11 @@ mdspass3/
 - CMake file: 
  https://github.com/yoshiumeno/mdspass3/tree/main/CMakeLists.txt
 
-### How to compile (Linux/Mac)
+### How to compile (Linux/macOS)
 
 ##### on Ubuntu:
 ```  
 sudo apt install cmake libfltk1.3-dev libglu1-mesa-dev liblapack-dev libblas-dev libpng-dev libpng-dev  
-rm -rf ./build  
 cmake -S . -B build  
 cd build  
 make  
@@ -68,17 +67,16 @@ make
 ##### on macOS:
 ```
 brew install cmake fltk mesa-glu lapack openblas libpng
-rm -rf ./build
 cmake -S . -B build
 cd build
 make
 ```
 
-### How to run (Windows)
-
-Go down to forWin/ folder and make sure that you have
-`CONFIG`, `SETDAT` and `pot/` in the folder.
-Simply run `mdspass3.exe`.
+### How to run
+Go down to `build/` (Linux or macOS) or `forWin` (Windows) directory and make sure that you have
+`CONFIG`, `SETDAT` and `pot/` in the directory.
+If not, copy them to the directory.
+Simply run `./mdspass3` (Linux or macOS) or `mdspass3.exe` (Windows).
 
 
 ---
