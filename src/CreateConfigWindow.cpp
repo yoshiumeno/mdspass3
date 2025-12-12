@@ -8,7 +8,7 @@
 void set_atom_color();
 
 CreateConfigWindow::CreateConfigWindow()
-    : BaseWindow(600, 850, "Create Config")
+    : BaseWindow(600, 650, "Create Config")
 {
     end_window();
     // Edit atom ウィンドウのインスタンスを作成します。
@@ -17,7 +17,7 @@ CreateConfigWindow::CreateConfigWindow()
 
     // Edit atom ウィンドウの 1 行目のパネルを作成します。
     const int panel1_width = 580;
-    const int panel1_height = 380;
+    const int panel1_height = 250;
     FramedPanel* panel1 =
         new FramedPanel(window_width, panel1_width, panel1_height, "", false);
     panel1->begin();
@@ -43,6 +43,17 @@ CreateConfigWindow::CreateConfigWindow()
     create_text_input(panel1_column_width - 30, 100, "ARG:", atom.potential_arg);
 
     // ラジオ ボタンを作成します。
+    Fl_Choice* lattype_choice = create_dropdown_list(panel1_column_width - 30, 100, "Lattice:", &config_type);
+    lattype_choice->add("FCC");
+    lattype_choice->add("BCC");
+    lattype_choice->add("Diamond");
+    lattype_choice->add("Wurtzite");
+    lattype_choice->add("Nanotube");
+    lattype_choice->add("2-D Triangle");
+    lattype_choice->add("Graphene");
+    //create_dropdown_list(300, 220, "Algorithm:", &ensemble, ensemble_list, MAXENSTYPE, CB_ENSEMBLE);
+
+    /*
     create_radio_button(panel1_column_width - 30, "FCC", &config_type, 0, 0);
     create_radio_button(panel1_column_width - 30, "BCC", &config_type, 1, 0);
     create_radio_button(panel1_column_width - 30, "Diamond", &config_type, 2, 0);
@@ -51,6 +62,7 @@ CreateConfigWindow::CreateConfigWindow()
     create_radio_button(panel1_column_width - 30, "2-D Triangle", &config_type, 5,
         0);
     create_radio_button(panel1_column_width - 30, "Graphene", &config_type, 6, 0);
+    */
 
     // スピナーを作成します。
     create_float_spinner(panel1_column_width - 30, 80,
@@ -394,16 +406,19 @@ CreateConfigWindow::CreateConfigWindow()
 
     // Edit パネルを作成します。
     const int edit_width = 120;
+    /*
     const int edit_height = 80;
     FramedPanel* edit_panel =
-        new FramedPanel(window_width, edit_width, edit_height, "Edit", true);
+        new FramedPanel(window_width, edit_width, edit_height, "", true);
     edit_panel->begin();
+    */
 
     // Edit パネルの 1 行目です。
     Fl_Pack* edit_row1 = create_row(edit_width, 25);
-    create_window_open_button(80, "Edit atom", edit_atom_window);
+    create_horizontal_space(240);
+    create_window_open_button(120, "Edit atom", edit_atom_window);
     edit_row1->end();
-    edit_panel->end();
+    //edit_panel->end();
 
     // ボタン行を作成します。
     Fl_Pack* button_row = create_row(window_width, 25, 10);

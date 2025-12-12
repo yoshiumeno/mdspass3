@@ -2,7 +2,7 @@
 #include "custom_gui_functions.h"
 #include "myheader.h"
 
-QuitWindow::QuitWindow() : BaseWindow(300, 100, "Quit confirmation")
+QuitWindow::QuitWindow() : BaseWindow(300, 150, "Quit confirmation")
 {
     // 列の作成を開始します。
     Fl_Pack* quit_column1 = new Fl_Pack(0, 0, window_width, 50);
