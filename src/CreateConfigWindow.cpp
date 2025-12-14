@@ -8,18 +8,21 @@
 void set_atom_color();
 
 CreateConfigWindow::CreateConfigWindow()
-    : BaseWindow(600, 650, "Create Config")
+    : BaseWindow(600, 420, "Create Config")
 {
     end_window();
     // Edit atom ウィンドウのインスタンスを作成します。
     edit_atom_window = std::make_unique<EditAtomWindow>();
     begin_window();
 
-    // Edit atom ウィンドウの 1 行目のパネルを作成します。
+    // Create Config ウィンドウの 1 行目のパネルを作成します。
     const int panel1_width = 580;
     const int panel1_height = 250;
-    FramedPanel* panel1 =
-        new FramedPanel(window_width, panel1_width, panel1_height, "", false);
+    //FramedPanel* panel1 =
+    //    new FramedPanel(window_width, panel1_width, panel1_height, "", false);
+    RolloutPanel* panel1 =
+        new RolloutPanel(window_width, panel1_width, panel1_height, "Structure", false);
+    panel1->toggle();
     panel1->begin();
 
     // パネル 1 の 1 列目です。
